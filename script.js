@@ -48,8 +48,18 @@ let norwegianWood = new createBook ('Norwegian Wood','./asset/book-images/norweg
 
 let taleOfTwoCities = new createBook ('A Tale of Two Cities','./asset/book-images/a-tale-of-two-cities.jpeg','./book-dir/a-tale-of-two-cities.html');
 
+let alchemist = new createBook ('Alchemist','./asset/book-images/alchemist.jpeg','./book-dir/alchemist.html');
+
+let mansSearchForMeaning = new createBook ("Man's Search for Meaning",'./asset/book-images/mans-search-for-meaning.jpg','./book-dir/mans-search-for-meaning.html');
+
+let oneHundredYearofSolitude = new createBook ("One Hundred Years of Solitude",'./asset/book-images/one-hundred-year-of-solitude.jpg','./book-dir/one-hundred-year-of-solitude.html');
+
+let toKillAMockingBird = new createBook ('To Kill A Mockingbird','./asset/book-images/to-kill-a-mocking-bird.jpeg','./book-dir/to-kill-a-mocking-bird.html');
+
+let wutheringHeight = new createBook ('Wuthering Heights','./asset/book-images/wuthering-height.jpg','./book-dir/wuthering-height.html')
+
 // allBooks in an array
-let allBooks = [adventureOfSherlockHolmes,norwegianWood,taleOfTwoCities];
+let allBooks = [adventureOfSherlockHolmes,norwegianWood,taleOfTwoCities,alchemist,mansSearchForMeaning,oneHundredYearofSolitude,toKillAMockingBird,wutheringHeight];
 let favBooks = [];
 
 
