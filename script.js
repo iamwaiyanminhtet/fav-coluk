@@ -2,6 +2,7 @@ const mainLayout = document.querySelector('#main-layout');
 const favLayout = document.querySelector('#fav-layout');
 const favBtn = document.querySelector('#favBtn');
 const allBtn = document.querySelector('#all');
+const noFavBookText = document.querySelector('#no-fav-book')
 
 // create new book
 function createBook (title,imagePath,filePath) {
@@ -15,6 +16,7 @@ function createBook (title,imagePath,filePath) {
 };
 
 // display all book
+let allBooksHtml = "";
 function displayAllBooks (title,imagePath,filePath,fav) {
     allBooksHtml += `
     <div class="card">
@@ -48,22 +50,17 @@ let taleOfTwoCities = new createBook ('A Tale of Two Cities','./asset/book-image
 
 // allBooks in an array
 let allBooks = [adventureOfSherlockHolmes,norwegianWood,taleOfTwoCities];
-let allBooksHtml = "";
 let favBooks = [];
+
 
 // loop allBooks and DISPLAY each book in UI
 allBooks.forEach(book => {
-    displayAllBooks(book.title,book.imagePath,book.filePath,book.fav);
-});
-mainLayout.innerHTML = allBooksHtml;
+    let currentFav = localStorage.getObj('data') || favBooks;
+    let isFav = currentFav.some(curFavBook => curFavBook.title === book.title);
 
-// fav btn click 
-let favBooksHtml = '';
-favBtn.addEventListener('click', e => {
-    // loop allBooks and DISPLAY each book in UI
-    favBooks = JSON.parse(localStorage.getItem('data'));
-    favBooks.forEach(book => {
-        favBooksHtml += `
+    // if already in fav, show added fav btn
+    if (isFav) {
+        allBooksHtml += `
         <div class="card">
             <div class="card-img">
                 <a href="${book.filePath}">
@@ -72,17 +69,53 @@ favBtn.addEventListener('click', e => {
             </div>
             <div class="card-body">
                 <h3>${book.title}</h3>
-                <button data-action = "add" class="d-none">Add to Fav</button>
-                <button data-action = "remove" >Added</button>
+                <button data-action="add" class="d-none">Add to Fav</button>
+                <button data-action="remove">Added</button>
             </div>
         </div>
         `;
-    });
-    let text = mainLayout.innerHTML;
-    localStorage.setItem('main-layout-before-fav',text);
-    mainLayout.innerHTML = '';
-    favLayout.innerHTML = favBooksHtml;
+    } else {
+        displayAllBooks(book.title, book.imagePath, book.filePath, book.fav);
+    }
+});
+mainLayout.innerHTML = allBooksHtml;
+
+// fav btn click 
+favBtn.addEventListener('click', e => {
+    let favBooksHtml = '';
+    // loop allBooks and DISPLAY each book in UI
+    let currentFav = JSON.parse(localStorage.getItem('data')) || favBooks;
+
+    if(currentFav.length === 0) {
+        mainLayout.innerHTML = '';
+        noFavBookText.classList.remove('d-none')
+    }else {
+        currentFav.forEach(book => {
+            favBooksHtml += `
+            <div class="card">
+                <div class="card-img">
+                    <a href="${book.filePath}">
+                        <img src="${book.imagePath}" alt="book image">
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h3>${book.title}</h3>
+                    <button data-action="add" class="d-none">Add to Fav</button>
+                    <button data-action="remove">Added</button>
+                </div>
+            </div>
+            `;
+        });
+        mainLayout.innerHTML = '';
+        favLayout.innerHTML = favBooksHtml;
+        localStorage.setObj('data',currentFav);
+    }
 })
+
+// all btn click
+allBtn.addEventListener('click', e => {
+    window.location.reload();
+});
 
 // add to fav btn click
 let cardBody = document.querySelectorAll('.card-body');
@@ -100,7 +133,7 @@ cardBody.forEach(card => {
                 let name = current.parentNode.firstElementChild.textContent;
                 
                 allBooks.forEach(book => {
-                    if (book.title == name) {
+                    if (book.title === name) {
                         favBooks.push(book)
                     }
                 });
@@ -126,16 +159,6 @@ cardBody.forEach(card => {
            }
         }
     })
-});
-
-allBtn.addEventListener('click', e => {
-    let text = localStorage.getItem('main-layout-before-fav');
-    if(text) {
-        mainLayout.innerHTML = text;
-        favLayout.innerHTML = '';
-    }else {
-        return
-    }
 });
 
 
