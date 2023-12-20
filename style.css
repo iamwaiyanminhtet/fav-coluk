@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(30, 30, 30);
+    color: antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+nav {
+    background-color: #7D98A1;
+    padding: 1rem;
+    width: inherit;
+}
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li:first-child {
+    font-size: 2rem;
+    color: black;
+    letter-spacing: 5px;
+
+}
+
+nav ul li:nth-child(2) {
+   display: flex;
+}
+
+#all {
+    background-color: rgb(122, 52, 1);
+    color: antiquewhite;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: 40px;
+    margin-right: 5px;
+}
+
+nav ul li div {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 80px;
+   background-color: #49392C;
+   padding: 0.5rem;
+   border-radius: 5px;
+}
+
+nav ul li img{
+    width: 25px;
+}
+
+#main-layout,#fav-layout {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+    row-gap: 10px;
+    column-gap: 10px;
+    padding: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    border: 3px solid rgb(124, 124, 124);
+    padding: 0.5rem;
+    width: 200px;
+    -webkit-box-shadow: 1px 0px 16px -5px rgba(0, 130, 114, 1);
+    -moz-box-shadow: 1px 0px 16px -5px rgba(0, 130, 114, 1);
+    box-shadow: 1px 0px 16px -5px rgba(0, 130, 114, 1);
+}
+
+.card a {
+    color: antiquewhite ;
+    text-decoration: none ;
+}
+
+.card a:visited {
+    color: antiquewhite ;
+    text-decoration: none ;
+}
+
+.card-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+img {
+    width: 100%;
+}
+
+.card-body {
+    background-color: #002a3f;
+    padding: 10px;
+}
+
+
+
+.card-body button {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border: none;
+    margin-top: 10px;
+}
+
+.d-none {
+    display: none;
+}
+
+
+
+@media screen and (max-width : 900px) {
+    #main-layout, #fav-layout {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media screen and (max-width : 600px) {
+    #main-layout, #fav-layout {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width : 400px) {
+    #main-layout, #fav-layout {
+        grid-template-columns: repeat(1,1fr);
+    }
+}
