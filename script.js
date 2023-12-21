@@ -90,6 +90,52 @@ allBooks.forEach(book => {
 });
 mainLayout.innerHTML = allBooksHtml;
 
+// add to fav btn click
+let cardBody = document.querySelectorAll('.card-body');
+cardBody.forEach(card => {
+    card.addEventListener('click', e => {
+        let current = e.target;
+        if(current.matches('button')) {
+            // add to the fav
+           if(current.dataset.action === "add") {
+                let currentFav = JSON.parse(localStorage.getItem('data')) || favBooks;
+
+                // change UI button
+                current.classList.add('d-none');
+                current.parentNode.lastElementChild.classList.remove('d-none');
+
+                // add to fav array
+                let name = current.parentNode.firstElementChild.textContent;
+                
+                allBooks.forEach(book => {
+                    if (book.title === name) {
+                        currentFav.push(book)
+                    }
+                });
+                localStorage.setObj('data',currentFav);
+           }
+
+           // remove from the fav
+           if(current.dataset.action==="remove") {
+                // change UI button
+                current.classList.add('d-none');
+                current.previousElementSibling.classList.remove('d-none');
+
+                // remove from fav array
+                let name = current.parentNode.firstElementChild.textContent;
+                
+                favBooks = JSON.parse(localStorage.getItem('data'));
+                favBooks.forEach(book => {
+                    if (book.title == name) {
+                        favBooks.splice(favBooks.findIndex(book => book.title == name),1);
+                    }
+                });
+                localStorage.setObj('data',favBooks)
+           }
+        }
+    })
+});
+
 // fav btn click 
 favBtn.addEventListener('click', e => {
     let favBooksHtml = '';
@@ -110,7 +156,6 @@ favBtn.addEventListener('click', e => {
                 </div>
                 <div class="card-body">
                     <h3>${book.title}</h3>
-                    <button data-action="add" class="d-none">Add to Fav</button>
                     <button data-action="remove">Added</button>
                 </div>
             </div>
@@ -122,54 +167,13 @@ favBtn.addEventListener('click', e => {
     }
 })
 
+
 // all btn click
 allBtn.addEventListener('click', e => {
     window.location.reload();
 });
 
-// add to fav btn click
-let cardBody = document.querySelectorAll('.card-body');
-cardBody.forEach(card => {
-    card.addEventListener('click', e => {
-        let current = e.target;
-        if(current.matches('button')) {
-            // add to the fav
-           if(current.dataset.action === "add") {
-                // change UI button
-                current.classList.add('d-none');
-                current.parentNode.lastElementChild.classList.remove('d-none');
 
-                // add to fav array
-                let name = current.parentNode.firstElementChild.textContent;
-                
-                allBooks.forEach(book => {
-                    if (book.title === name) {
-                        favBooks.push(book)
-                    }
-                });
-                localStorage.setObj('data',favBooks);
-           }
-
-           // remove from the fav
-           if(current.dataset.action === "remove") {
-                // change UI button
-                current.classList.add('d-none');
-                current.previousElementSibling.classList.remove('d-none');
-
-                // remove from fav array
-                let name = current.parentNode.firstElementChild.textContent;
-                
-                favBooks = JSON.parse(localStorage.getItem('data'));
-                favBooks.forEach(book => {
-                    if (book.title == name) {
-                        favBooks.splice(favBooks.findIndex(book => book.title == name),1);
-                    }
-                });
-                localStorage.setObj('data',favBooks)
-           }
-        }
-    })
-});
 
 
 

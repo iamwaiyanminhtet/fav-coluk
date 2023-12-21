@@ -116,14 +116,14 @@ img {
     width: 100%;
 }
 
-.card-body {
+.card-body{
     background-color: #002a3f;
     padding: 10px;
 }
 
 
 
-.card-body button {
+.card-body button{
     width: 100%;
     background-color: black;
     color: white;
