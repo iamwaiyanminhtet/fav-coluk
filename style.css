@@ -132,11 +132,20 @@ img {
     margin-top: 10px;
 }
 
+
+.stroke-heart, .fill-heart {
+    color: #005b68;
+    width: 2rem;
+    height: 1.5rem;
+}
+
+.card-body button > svg {
+    pointer-events: none;
+  }
+
 .d-none {
     display: none;
 }
-
-
 
 @media screen and (max-width : 900px) {
     #main-layout, #fav-layout {
