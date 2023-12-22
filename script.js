@@ -34,12 +34,12 @@ function displayAllBooks (title,imagePath,filePath,fav) {
 }
 
 // add custom method to Storage obj
-Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
-}
+// Storage.prototype.setObj = function(key, obj) {
+//     return this.setItem(key, JSON.stringify(obj))
+// }
+// Storage.prototype.getObj = function(key) {
+//     return JSON.parse(this.getItem(key))
+// }
 
 // sample
 let adventureOfSherlockHolmes = new createBook('The Adventure of Sherlock Holmes','./asset/book-images/adventure-of-sherlock-holmes.jpg','./book-dir/adventure-of-sherlock-holmes.html');
@@ -65,7 +65,7 @@ let favBooks = [];
 
 // loop allBooks and DISPLAY each book in UI
 allBooks.forEach(book => {
-    let currentFav = localStorage.getObj('data') || favBooks;
+    let currentFav = JSON.parse(localStorage.getItem('data')) || favBooks;
     let isFav = currentFav.some(curFavBook => curFavBook.title === book.title);
 
     // if already in fav, show added fav btn
@@ -112,7 +112,7 @@ cardBody.forEach(card => {
                         currentFav.push(book)
                     }
                 });
-                localStorage.setObj('data',currentFav);
+                localStorage.setItem('data',JSON.stringify(currentFav));
            }
 
            // remove from the fav
@@ -130,7 +130,7 @@ cardBody.forEach(card => {
                         favBooks.splice(favBooks.findIndex(book => book.title == name),1);
                     }
                 });
-                localStorage.setObj('data',favBooks)
+                localStorage.setItem('data',JSON.stringify(favBooks));
            }
         }
     })
@@ -161,9 +161,9 @@ favBtn.addEventListener('click', e => {
             </div>
             `;
         });
-        mainLayout.innerHTML = '';
-        favLayout.innerHTML = favBooksHtml;
-        localStorage.setObj('data',currentFav);
+        mainLayout.innerHTML = favBooksHtml
+        localStorage.setItem('data',JSON.stringify(currentFav));
+
     }
 })
 
