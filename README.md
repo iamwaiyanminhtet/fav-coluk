@@ -4,4 +4,4 @@
 - Your added favourite books will be there even if you reload the browser window.
 - this is for DOM practice and localStorage.
 
->Live preview - [Here](https://iamwaiyanminhtet.github.io/fav-coluk/)
+>Live preview - [Here](https://iamwaiyanminhtet.github.io/fav-coluk-vanilla-js/)
